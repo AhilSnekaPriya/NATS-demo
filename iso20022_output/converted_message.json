@@ -1,6 +1,6 @@
 {
-  "MsgId" : "MSG59054815",
-  "CreDtTm" : "2025-07-11T21:22:48",
+  "MsgId" : "MSG6B2C1B2C",
+  "CreDtTm" : "2025-07-11T21:38:02",
   "NbOfTxs" : "1",
   "CtrlSum" : null,
   "InitgPty" : {
@@ -17,7 +17,7 @@
     }
   },
   "PmtInf" : {
-    "PmtInfId" : "PMT1782ECAD",
+    "PmtInfId" : "PMTEE4920F2",
     "PmtMtd" : "TRF",
     "BtchBookg" : "true",
     "NbOfTxs" : "1",
@@ -53,7 +53,7 @@
     },
     "CdtTrfTxInf" : {
       "PmtId" : {
-        "InstrId" : "INS6252D804",
+        "InstrId" : "INS743E2443",
         "EndToEndId" : null
       },
       "Amt" : {
