@@ -1,0 +1,79 @@
+plugins {
+    id 'org.springframework.boot' version '2.7.18'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+    id 'java'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    
+    // NATS Java Client
+    implementation 'io.nats:jnats:2.20.1'
+    
+    // JSON processing for NATS messages
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+    
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+// Custom task to run the application
+task runApp(type: JavaExec) {
+    group = 'application'
+    description = 'Run the NATS demo application'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.example.natsdemo.NatsDemoApplication'
+}
+
+// Custom task to test ISO conversion
+task testIsoConversion(type: Exec) {
+    group = 'verification'
+    description = 'Test ISO 8583 to ISO 20022 conversion'
+    commandLine 'bash', 'test-iso-conversion.sh'
+    dependsOn 'bootRun'
+    
+    // Wait for application to start
+    doFirst {
+        sleep(10)
+    }
+}
+
+// Custom task to start NATS server
+task startNatsServer(type: Exec) {
+    group = 'application'
+    description = 'Start NATS server'
+    commandLine './nats-server-v2.10.7-darwin-arm64/nats-server'
+}
+
+// Custom task to run full demo
+task runDemo {
+    group = 'application'
+    description = 'Run full NATS demo with ISO conversion'
+    dependsOn 'startNatsServer', 'bootRun'
+    
+    doLast {
+        println "Demo is running!"
+        println "NATS Server: localhost:4222"
+        println "Spring Boot App: http://localhost:8080"
+        println "Test ISO conversion: ./test-iso-conversion.sh"
+    }
+} 

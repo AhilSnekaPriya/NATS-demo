@@ -1,0 +1,22 @@
+{
+  "mti": "0200",
+  "pan": "4111111111111111",
+  "processingCode": "000000",
+  "amount": "150.00",
+  "stan": "123456",
+  "time": "143022",
+  "date": "0710",
+  "merchantType": "5411",
+  "posEntryMode": "021",
+  "cardSequence": "001",
+  "acquirerId": "123456",
+  "forwarderId": "654321",
+  "track2": "4111111111111111=123456789012345",
+  "retrievalRef": "123456789012",
+  "authCode": "123456",
+  "responseCode": "00",
+  "cardAcceptor": "12345678",
+  "cardAcceptorId": "123456789012345",
+  "cardAcceptorName": "DEMO GROCERY STORE",
+  "currencyCode": "840"
+} 

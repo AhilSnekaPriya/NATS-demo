@@ -1,0 +1,499 @@
+{
+	"info": {
+		"_postman_id": "nats-demo-collection",
+		"name": "NATS Demo Application",
+		"description": "Complete collection for testing NATS messaging and ISO 8583 to ISO 20022 conversion",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Health Checks",
+			"item": [
+				{
+					"name": "Application Health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/health",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"health"
+							]
+						},
+						"description": "Check if the Spring Boot application is running"
+					}
+				},
+				{
+					"name": "ISO Converter Health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/iso/health",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"iso",
+								"health"
+							]
+						},
+						"description": "Check the health of the ISO converter service"
+					}
+				},
+				{
+					"name": "NATS Connection Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/nats/status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"nats",
+								"status"
+							]
+						},
+						"description": "Check if NATS connection is active"
+					}
+				}
+			]
+		},
+		{
+			"name": "NATS Messaging",
+			"item": [
+				{
+					"name": "Publish Simple Message",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"subject\": \"demo.messages\",\n  \"message\": \"Hello from Postman!\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/nats/publish",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"nats",
+								"publish"
+							]
+						},
+						"description": "Publish a simple text message to a NATS subject"
+					}
+				},
+				{
+					"name": "Publish JSON Message",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"subject\": \"demo.json\",\n  \"payload\": {\n    \"type\": \"user_event\",\n    \"userId\": \"12345\",\n    \"action\": \"login\",\n    \"timestamp\": \"2025-07-11T20:30:00Z\",\n    \"data\": {\n      \"ip\": \"192.168.1.100\",\n      \"userAgent\": \"PostmanRuntime/7.32.3\"\n    }\n  }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/nats/publish/json",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"nats",
+								"publish",
+								"json"
+							]
+						},
+						"description": "Publish a JSON object to a NATS subject"
+					}
+				},
+				{
+					"name": "Request-Reply Message",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"subject\": \"demo.request\",\n  \"requestData\": \"What is the current time?\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/nats/request",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"nats",
+								"request"
+							]
+						},
+						"description": "Send a request message and wait for a response"
+					}
+				}
+			]
+		},
+		{
+			"name": "ISO 8583 to ISO 20022 Conversion",
+			"item": [
+				{
+					"name": "Get Sample ISO 8583 Message",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/iso/sample-iso8583",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"iso",
+								"sample-iso8583"
+							]
+						},
+						"description": "Get a sample ISO 8583 message for testing"
+					}
+				},
+				{
+					"name": "Convert ISO 8583 to ISO 20022",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"mti\": \"0200\",\n  \"pan\": \"4111111111111111\",\n  \"processingCode\": \"000000\",\n  \"amount\": \"150.00\",\n  \"stan\": \"123456\",\n  \"time\": \"143022\",\n  \"date\": \"0710\",\n  \"merchantType\": \"5411\",\n  \"posEntryMode\": \"021\",\n  \"cardSequence\": \"001\",\n  \"acquirerId\": \"123456\",\n  \"forwarderId\": \"654321\",\n  \"track2\": \"4111111111111111=123456789012345\",\n  \"retrievalRef\": \"123456789012\",\n  \"authCode\": \"123456\",\n  \"responseCode\": \"00\",\n  \"cardAcceptor\": \"12345678\",\n  \"cardAcceptorId\": \"123456789012345\",\n  \"cardAcceptorName\": \"DEMO MERCHANT\",\n  \"currencyCode\": \"840\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/iso/convert",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"iso",
+								"convert"
+							]
+						},
+						"description": "Convert an ISO 8583 message to ISO 20022 format"
+					}
+				},
+				{
+					"name": "Test ISO Conversion via NATS",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/iso/test-conversion",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"iso",
+								"test-conversion"
+							]
+						},
+						"description": "Trigger ISO conversion test via NATS messaging"
+					}
+				}
+			]
+		},
+		{
+			"name": "Advanced NATS Testing",
+			"item": [
+				{
+					"name": "Publish to ISO 8583 Subject",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"subject\": \"iso8583.messages\",\n  \"message\": \"{\\\"MTI\\\":\\\"0200\\\",\\\"PAN\\\":\\\"4111111111111111\\\",\\\"AMOUNT\\\":\\\"200.00\\\",\\\"STAN\\\":\\\"789012\\\"}\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/nats/publish",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"nats",
+								"publish"
+							]
+						},
+						"description": "Publish a message to the ISO 8583 subject for automatic conversion"
+					}
+				},
+				{
+					"name": "Publish User Event",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"subject\": \"user.events\",\n  \"payload\": {\n    \"eventType\": \"USER_LOGIN\",\n    \"userId\": \"user123\",\n    \"timestamp\": \"2025-07-11T20:30:00Z\",\n    \"sessionId\": \"sess_abc123\",\n    \"ipAddress\": \"192.168.1.100\"\n  }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/nats/publish/json",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"nats",
+								"publish",
+								"json"
+							]
+						},
+						"description": "Publish a user event to the user.events subject"
+					}
+				},
+				{
+					"name": "Publish System Event",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"subject\": \"system.events\",\n  \"payload\": {\n    \"eventType\": \"SYSTEM_STARTUP\",\n    \"component\": \"NATS_DEMO_APP\",\n    \"timestamp\": \"2025-07-11T20:30:00Z\",\n    \"version\": \"1.0.0\",\n    \"status\": \"RUNNING\"\n  }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/nats/publish/json",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"nats",
+								"publish",
+								"json"
+							]
+						},
+						"description": "Publish a system event to the system.events subject"
+					}
+				}
+			]
+		},
+		{
+			"name": "File-based ISO Conversion",
+			"item": [
+				{
+					"name": "Get File Converter Info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/file-iso/info",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"file-iso",
+								"info"
+							]
+						},
+						"description": "Get information about the file-based ISO converter service"
+					}
+				},
+				{
+					"name": "Create Sample ISO 8583 File",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/file-iso/create-sample/test_payment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"file-iso",
+								"create-sample",
+								"test_payment"
+							]
+						},
+						"description": "Create a sample ISO 8583 file for testing"
+					}
+				},
+				{
+					"name": "Convert Single File",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/file-iso/convert/sample_payment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"file-iso",
+								"convert",
+								"sample_payment"
+							]
+						},
+						"description": "Convert a single ISO 8583 file to ISO 20022 format"
+					}
+				},
+				{
+					"name": "Batch Convert Files",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/file-iso/convert-batch?inputDir=iso8583_input&outputDir=iso20022_output",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"file-iso",
+								"convert-batch"
+							],
+							"query": [
+								{
+									"key": "inputDir",
+									"value": "iso8583_input"
+								},
+								{
+									"key": "outputDir",
+									"value": "iso20022_output"
+								}
+							]
+						},
+						"description": "Convert all ISO 8583 files in a directory to ISO 20022 format"
+					}
+				},
+				{
+					"name": "Upload and Convert File",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "outputFileName",
+									"value": "converted_message",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/file-iso/upload-and-convert",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"file-iso",
+								"upload-and-convert"
+							]
+						},
+						"description": "Upload an ISO 8583 file and convert it to ISO 20022 format"
+					}
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+} 

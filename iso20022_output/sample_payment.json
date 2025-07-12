@@ -1,0 +1,87 @@
+{
+  "MsgId" : "MSGD691635F",
+  "CreDtTm" : "2025-07-11T20:56:30",
+  "NbOfTxs" : "1",
+  "CtrlSum" : null,
+  "InitgPty" : {
+    "Nm" : "Demo Bank",
+    "Id" : {
+      "OrgId" : {
+        "Othr" : {
+          "Id" : "DEMO001",
+          "SchmeNm" : {
+            "Cd" : "BANK"
+          }
+        }
+      }
+    }
+  },
+  "PmtInf" : {
+    "PmtInfId" : "PMT34E8D296",
+    "PmtMtd" : "TRF",
+    "BtchBookg" : "true",
+    "NbOfTxs" : "1",
+    "CtrlSum" : null,
+    "PmtTpInf" : {
+      "SvcLvl" : {
+        "Cd" : "SEPA"
+      }
+    },
+    "ReqdExctnDt" : "2025-07-11",
+    "Dbtr" : {
+      "OrgId" : {
+        "Othr" : {
+          "Id" : null,
+          "SchmeNm" : {
+            "Cd" : "BANK"
+          }
+        }
+      }
+    },
+    "DbtrAcct" : {
+      "Id" : {
+        "Othr" : {
+          "Id" : null,
+          "SchmeNm" : null
+        }
+      }
+    },
+    "DbtrAgt" : {
+      "FinInstnId" : {
+        "BICFI" : "DEMOBANK"
+      }
+    },
+    "CdtTrfTxInf" : {
+      "PmtId" : {
+        "InstrId" : "INSEF66E786",
+        "EndToEndId" : null
+      },
+      "Amt" : {
+        "InstdAmt" : null
+      },
+      "CdtrAgt" : {
+        "FinInstnId" : {
+          "BICFI" : "TARGETBANK"
+        }
+      },
+      "Cdtr" : {
+        "OrgId" : {
+          "Othr" : {
+            "Id" : "TARGET001",
+            "SchmeNm" : {
+              "Cd" : "BANK"
+            }
+          }
+        }
+      },
+      "CdtrAcct" : {
+        "Id" : {
+          "Othr" : {
+            "Id" : "TARGETACCOUNT",
+            "SchmeNm" : null
+          }
+        }
+      }
+    }
+  }
+}

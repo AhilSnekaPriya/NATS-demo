@@ -1,0 +1,22 @@
+{
+  "mti": "0200",
+  "pan": "5555555555554444",
+  "processingCode": "010000",
+  "amount": "200.00",
+  "stan": "789012",
+  "time": "154530",
+  "date": "0711",
+  "merchantType": "6011",
+  "posEntryMode": "022",
+  "cardSequence": "001",
+  "acquirerId": "987654",
+  "forwarderId": "456789",
+  "track2": "5555555555554444=123456789012345",
+  "retrievalRef": "987654321098",
+  "authCode": "654321",
+  "responseCode": "00",
+  "cardAcceptor": "87654321",
+  "cardAcceptorId": "987654321098765",
+  "cardAcceptorName": "ATM LOCATION 001",
+  "currencyCode": "840"
+} 

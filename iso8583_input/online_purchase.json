@@ -1,0 +1,22 @@
+{
+  "mti": "0200",
+  "pan": "378282246310005",
+  "processingCode": "000000",
+  "amount": "75.50",
+  "stan": "345678",
+  "time": "162045",
+  "date": "0711",
+  "merchantType": "5812",
+  "posEntryMode": "012",
+  "cardSequence": "001",
+  "acquirerId": "111222",
+  "forwarderId": "333444",
+  "track2": "378282246310005=123456789012345",
+  "retrievalRef": "555666777888",
+  "authCode": "999888",
+  "responseCode": "00",
+  "cardAcceptor": "55556666",
+  "cardAcceptorId": "777788889999000",
+  "cardAcceptorName": "ONLINE STORE",
+  "currencyCode": "840"
+} 
